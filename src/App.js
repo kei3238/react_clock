@@ -25,11 +25,19 @@ class App extends Component {
     };
     
     // bind event handler
-    this.handleClick = this.handleClick.bind(this);
+    this.handleTime = this.handleTime.bind(this);
+  }
+
+  componentDidMount() {
+    this.timer = setInterval(this.handleTime, 1000);
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.timer);
   }
 
   // update state when clicked
-  handleClick(){
+  handleTime(){
     const datetime = parseTime();
     this.setState({
       ...datetime
@@ -45,7 +53,6 @@ class App extends Component {
     return (
       <div>
         {hour}:{minute}:{second}
-        <button onClick={this.handleClick}>Update</button>
       </div>
     );
   }
